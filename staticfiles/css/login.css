@@ -1,0 +1,29 @@
+/* Additional customizations */
+body {
+    background-color: #f8f9fa;
+}
+
+/* Header with background */
+header.bg-dark {
+    background-image: url('path-to-image.jpg'); /* Optional background image */
+    background-size: cover;
+    background-position: center;
+    color: #ffffff;
+}
+
+.card {
+    border-radius: 10px;
+}
+
+/* Button hover effect */
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Optional responsive padding adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+}
