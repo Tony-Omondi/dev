@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/home/nito/Desktop/Ecommerce-Boiler-Plate-main/nito"
+set -gx VIRTUAL_ENV "/home/nito/Desktop/dev/nito"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

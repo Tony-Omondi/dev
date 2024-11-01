@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 
+
 #from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,7 +25,7 @@ SECRET_KEY = 'django-insecure-x4m$gfeda-r+)u05g*bzm%8#_vz&8-wl^3epo45gqi#_eqwvtq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = []
 CSRF_TRUSTED_ORIGINS = []
 
 # Application definition
@@ -142,9 +143,22 @@ STATICFILES_DIRS = ['static/']
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+SUPABASE_URL='https://jxegrzviztasnwbzxzqa.supabase.co'
+SUPABASE_API_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp4ZWdyenZpenRhc253Ynp4enFhIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczMDQxOTYzNCwiZXhwIjoyMDQ1OTk1NjM0fQ.78xvfqGIincye-31VOZ3fzOvjTvy4N7lpI_xWORugNA'
 
-MEDIA_URL = 'media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# settings.py
+
+# Use Supabase as the default file storage backend
+DEFAULT_FILE_STORAGE = 'store.storage.SupabaseStorage'
+
+# Supabase credentials
+SUPABASE_API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp4ZWdyenZpenRhc253Ynp4enFhIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczMDQxOTYzNCwiZXhwIjoyMDQ1OTk1NjM0fQ.78xvfqGIincye-31VOZ3fzOvjTvy4N7lpI_xWORugNA'  # Replace with your actual API key
+SUPABASE_URL = 'https://jxegrzviztasnwbzxzqa.supabase.co'  # Replace with your Supabase project URL
+SUPABASE_ROOT_PATH = 'product-images/'  # Root path for media files; customize as needed
+
+# Define MEDIA_URL for referencing files in templates or views
+MEDIA_URL = f'{SUPABASE_URL}/storage/v1/object/public/{SUPABASE_ROOT_PATH}'
+
 
 
 # Default primary key field type
