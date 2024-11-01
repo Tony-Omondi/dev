@@ -168,20 +168,39 @@ def logout_user(request):
 
 
 def register_user(request):
-    form = SignUpForm()
+    """
+    Handles user registration. Displays a registration form,
+    processes form submission, and logs in the user upon successful registration.
+    """
     if request.method == "POST":
         form = SignUpForm(request.POST)
+        
+        # Check if the form is valid
         if form.is_valid():
-            form.save()
+            user = form.save(commit=False)  # Create the user object but don't save it yet
+            user.save()  # Save the user to the database
+            
+            # Authenticate the user and log them in
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
             user = authenticate(username=username, password=password)
-            login(request, user)
-            messages.success(request, "Username Created - Please Fill Out Your User Info Below...")
-            return redirect('update_info')
+            if user:
+                login(request, user)  # Log in the user
+                messages.success(request, "Registration successful! Please fill out your user info below.")
+                return redirect('update_info')  # Redirect to the user info update page
+            else:
+                messages.error(request, "There was a problem logging you in after registration. Please try again.")
+                return redirect('register')
         else:
-            print(form.errors)  # Log form errors for debugging
-            messages.error(request, "Whoops! There was a problem Registering, please try again...")
-            return render(request, 'register.html', {'form': form})  # Render instead of redirect
+            # Log form errors for debugging and display them to the user
+            print(form.errors)  # Debugging: Log specific errors
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field.capitalize()}: {error}")  # Display field-specific errors
+            
+            return render(request, 'register.html', {'form': form})  # Render the form with errors
     else:
-        return render(request, 'register.html', {'form': form})
+        form = SignUpForm()  # Create a blank form for GET requests
+
+    # Render the registration form for GET requests
+    return render(request, 'register.html', {'form': form})
