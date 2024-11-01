@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-x4m$gfeda-r+)u05g*bzm%8#_vz&8-wl^3epo45gqi#_eqwvtq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['.vercel.app']
 CSRF_TRUSTED_ORIGINS = []
@@ -80,24 +80,25 @@ WSGI_APPLICATION = 'ecom.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',                  # Your database name
+        'USER': 'postgres.jxegrzviztasnwbzxzqa',                     # Your username
+        'PASSWORD': 'frizel1256,',     # Your password
+        'HOST': 'aws-0-eu-central-1.pooler.supabase.com',               # Your host
+        'PORT': '5432',                         # Your port
     }
 }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': '',
-#         'USER': '',
-#         'PASSWORD': DB_PASSWORD,
-#         'HOST': 'viaduct.proxy.rlwy.net',
-#         'PORT': '23278',
-        
-#     }
-# }
+
 
 
 # Password validation
